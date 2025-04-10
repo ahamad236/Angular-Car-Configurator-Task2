@@ -1,7 +1,7 @@
-import { computed, inject, Injectable, signal, Signal } from '@angular/core';
+import { computed, inject, Injectable, signal, Signal, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CarModel, Color } from './models.type';
+import { CarModel, Color, CarOptions, Config } from './models.type';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,9 @@ export class ConfiguratorService {
 
   readonly currentColor = signal<Color | undefined>(undefined);
   readonly currentCar = signal<CarModel | undefined>(undefined);
+  readonly currentConfig = signal<Config | undefined>(undefined);
+  readonly selectableOptions = signal<CarOptions | null>(null);
+
   readonly currentImage = computed(
     () => {
       const car = this.currentCar();
@@ -29,6 +32,15 @@ export class ConfiguratorService {
 
   readonly step2Ready: Signal<boolean> = computed(() => this.currentCar() != undefined && this.currentColor() != undefined);
 
+  constructor(){
+    effect(() => {
+      if(this.currentCar()?.code){
+        this.http.get<CarOptions>("options/" + this.currentCar()?.code)
+        .subscribe(options => this.selectableOptions.set(options))
+      }
+    });
+  }
+
   selectModel(code: CarModel["code"]) {
     const model = this.allModels().find(model => model.code === code);
     this.currentCar.set(model);
@@ -38,5 +50,10 @@ export class ConfiguratorService {
   selectColor(code: Color["code"]) {
     const color = this.selectableColors()?.find(color => color.code === code);
     this.currentColor.set(color);
+  }
+
+  selectConfig(id: string){
+    const config = this.selectableOptions()?.configs.find(c => c.id === + id);
+    this.currentConfig.set(config);
   }
 }
