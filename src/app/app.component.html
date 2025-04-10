@@ -1,0 +1,17 @@
+<div class="button-group">
+  <button routerLink="step1">
+    Step 1
+  </button>
+  <button routerLink="step2" [disabled]="! service.step2Ready()">
+    Step 2
+  </button>
+  <button>
+    Step 3
+  </button>
+</div>
+<router-outlet></router-outlet>
+<div>
+  @if (service.currentImage()) {
+    <img [src]="service.currentImage()" />
+  }
+</div>

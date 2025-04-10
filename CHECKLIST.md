@@ -1,0 +1,4 @@
+- When the app loads, the step 2 navigation button cannot be clicked.
+- Selecting a model and a color enables navigation to step 2.
+- Navigating to step 2 shows a dropdown to select a car config and zero, one, or two possible options based on the selected model (tow hitch and/or yoke wheel). For instance, Model 3 has none of these options, while Cybertruck has both.
+- "Selecting a config updates tha range, max speed, and cost information. For instance, If a Model Y Long Range is selected, we should see \"Range: 330 miles - Max speed: 135 - Cost: $48,990.00\""
