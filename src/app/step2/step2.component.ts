@@ -1,10 +1,11 @@
-import {Component, inject} from '@angular/core';
-import {ConfiguratorService} from '../configurator.service';
+import { Component, inject } from '@angular/core';
+import { ConfiguratorService } from '../configurator.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-step2',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './step2.component.html',
   styleUrl: './step2.component.scss'
 })

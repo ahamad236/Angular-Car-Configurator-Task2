@@ -8,12 +8,13 @@ Config:
     </option>
   }
 </select>
+@if(service.currentConfig(); as config){
   <div>
-    Range: 100 miles
-    - Max speed: 200 mph
-    - Cost: $50,000
+    Range: {{ config.range }} miles
+    - Max speed: {{ config.speed }}
+    - Cost: {{ config.price | currency }}
   </div>
-
+}
 <div>
 
   Tow hitch?
