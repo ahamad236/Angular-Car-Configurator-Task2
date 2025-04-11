@@ -16,10 +16,12 @@ Config:
   </div>
 }
 <div>
-
-  Tow hitch?
-  <input type="checkbox" />
+  @if(service.selectableOptions()?.towHitch){
+    Tow hitch?
+    <input type="checkbox" #hitch (change)="service.currentTowHitchIsSelected.set(hitch.checked)"/>
+  }
   <br/>
-  Yoke steering wheel? <input type="checkbox" />
-
+  @if(service.selectableOptions()?.yoke){
+    Yoke steering wheel? <input type="checkbox" #yoke (change)="service.currentWheelIsYoke.set(yoke.checked)"/>
+  }
 </div>

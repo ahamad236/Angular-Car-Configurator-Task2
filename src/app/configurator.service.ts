@@ -14,12 +14,13 @@ export class ConfiguratorService {
   );
 
   readonly selectableColors = computed(() => this.currentCar()?.colors);
+  readonly selectableOptions = signal<CarOptions | null>(null);
 
   readonly currentColor = signal<Color | undefined>(undefined);
   readonly currentCar = signal<CarModel | undefined>(undefined);
   readonly currentConfig = signal<Config | undefined>(undefined);
-  readonly selectableOptions = signal<CarOptions | null>(null);
-
+  readonly currentWheelIsYoke = signal<boolean>(false);
+  readonly currentTowHitchIsSelected = signal<boolean>(false);
   readonly currentImage = computed(
     () => {
       const car = this.currentCar();
@@ -29,7 +30,6 @@ export class ConfiguratorService {
       else return null;
     }
   );
-
   readonly step2Ready: Signal<boolean> = computed(() => this.currentCar() != undefined && this.currentColor() != undefined);
 
   constructor(){
